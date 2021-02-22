@@ -58,26 +58,37 @@ targetNum is within the nums array.
 const iterBSearch = (nums, targetNum) => {
   // Save references to indices at the beginning, middle, and end of the array
   // into variables: lowerIdx, midIdx, and upperIdx
-
+  let lowerIdx = 0;
+  let midIdx = Math.floor(nums.length / 2);
+  let upperIdx = nums.length - 1;
   // while the lowerIdx is less than or equal to the upperIdx, there are still
   // values to be searched
 
+  while (lowerIdx <= upperIdx) {
   // reassign the midIdx to the the middle of the new lower and upper indices
   // Hint: This is the sum of lower and upper, divided by 2
-
+    midIdx = Math.floor(lowerIdx + upperIdx) / 2;
   // if targetNum is larger than the value in the middle, we know targetNum is
   // not between the current lower and current middle, so reassign the lowerIdx
   // to the middle (ie cut off the left half of the array)
-
+    if (targetNum > nums[midIdx]) {
+      lowerIdx = midIdx;
+    }
   // if targetNum is less than the value in the middle, we know targetNum is not
   // between the current upper and current middle, so reassign the upperIdx
   // to the middle (ie cut off the right half of the array)
-
+    if (targetNum < nums[midIdx]) {
+      upperIdx = midIdx;
+    }
   // if it's not greater than or less than (ie 'else'), we have found our target 
   // at the midIdx and can return true and stop iterating.
-
+    else {
+      return true;
+    }
   // if we finish our while loop and haven't returned true, we've looked over
   // the entire array and didn't find targetNum, so return false
+  }
+  return false;
 }
 
 
