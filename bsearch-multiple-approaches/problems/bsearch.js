@@ -14,7 +14,6 @@ BINARY SEARCH VERSION 1:
 Write a Recursive Binary Search that returns a Boolean value indicating if
 targetNum is within the nums array.
 *******************************************************************/
-const oddNums = [11, 12, 13, 14, 15, 16, 17, 18, 19];
 const evenNums = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 const empty = [];
 const recurBSearch = (nums, targetNum) => {
@@ -61,29 +60,35 @@ const iterBSearch = (nums, targetNum) => {
   let lowerIdx = 0;
   let midIdx = Math.floor(nums.length / 2);
   let upperIdx = nums.length - 1;
+
   // while the lowerIdx is less than or equal to the upperIdx, there are still
   // values to be searched
-
   while (lowerIdx <= upperIdx) {
   // reassign the midIdx to the the middle of the new lower and upper indices
   // Hint: This is the sum of lower and upper, divided by 2
-    midIdx = Math.floor(lowerIdx + upperIdx) / 2;
+    midIdx = Math.floor((lowerIdx + upperIdx) / 2);
+    console.log('midIdx:', midIdx);
   // if targetNum is larger than the value in the middle, we know targetNum is
   // not between the current lower and current middle, so reassign the lowerIdx
   // to the middle (ie cut off the left half of the array)
     if (targetNum > nums[midIdx]) {
+     console.log('lower idx before:', lowerIdx);
       lowerIdx = midIdx;
+      console.log('lower idx after:', lowerIdx);
     }
   // if targetNum is less than the value in the middle, we know targetNum is not
   // between the current upper and current middle, so reassign the upperIdx
   // to the middle (ie cut off the right half of the array)
-    if (targetNum < nums[midIdx]) {
+    else if (targetNum < nums[midIdx]) {
+      console.log('upperIdx before:', upperIdx);
       upperIdx = midIdx;
+      console.log('upperIdx after:', upperIdx)
     }
   // if it's not greater than or less than (ie 'else'), we have found our target 
   // at the midIdx and can return true and stop iterating.
     else {
       return true;
+
     }
   // if we finish our while loop and haven't returned true, we've looked over
   // the entire array and didn't find targetNum, so return false
@@ -91,7 +96,9 @@ const iterBSearch = (nums, targetNum) => {
   return false;
 }
 
+const oddNums = [11, 12, 13, 14, 15, 16, 17, 18, 19];
 
+console.log(iterBSearch(oddNums, 12));
 /*******************************************************************
 BINARY SEARCH VERSION 3:
 
