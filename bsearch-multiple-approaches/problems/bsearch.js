@@ -46,7 +46,7 @@ const recurBSearch = (nums, targetNum) => {
        } 
 }
 
- console.log(recurBSearch(evenNums, 25));
+ //console.log(recurBSearch(evenNums, 25));
 /*******************************************************************
 BINARY SEARCH VERSION 2:
 
@@ -113,27 +113,31 @@ const recurBSearchIdx = (nums, targetNum) => {
   // return this search on the left half
   //if targetNum < nums[middle] return recurBleftHalf
   if (targetNum < nums[middle]) {
-    return recurBSearch(leftHalf, targetNum);
+    return recurBSearchIdx(leftHalf, targetNum);
   }
   // if targetNum is greater than the value in the array at slice point,
   //return this search on the right half
   else if (targetNum > nums[middle]) {
-    let res = recurBSearch(rightHalf, targetNum);
-    return recurBSearch(rightHalf, targetNum);
+    let res = recurBSearchIdx(rightHalf, targetNum);
+    console.log('res -', res);
+    console.log('res + middle - ', res + (middle + 1));
+    return res + (middle + 1);
+    // return recurBSearch(rightHalf, targetNum, res);
   }
   // if it's not greater than or less than (i.e. 'else'),
   // we know it's equal so return true
   else {
-    return true;
+    return middle;
   } 
   // HINT: the index value you return should be the index in the ORIGINAL array
   // and not the index of the sliced array. You'll notice this problem arise 
   // on the 'right half' recursion. in that, try saving the return value of the 
   // recursive call into a variable, and adding it to the current stack-frame's 
   // midIdx + 1.
-}
+// }
+// const oddNums = [11, 12, 13, 14, 15, 16, 17, 18, 19];
 
-
+// recurBSearchIdx(oddNums, 18);
 /*******************************************************************
 BINARY SEARCH VERSION 4:
 
